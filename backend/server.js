@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  const ipAddress = IP.address();
+  const ipAddress = req.header('x-forwarded-for') || req.socket.remoteAddress;
   res.send(ipAddress);
 });
 
